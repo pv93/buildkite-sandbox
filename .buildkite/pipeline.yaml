@@ -3,3 +3,32 @@ steps:
     command: echo "Greetings" 
     agents:
       queue: "ansible" 
+    branches: "master"
+  
+  - label: Only run this when we aren't pushing master
+    command: echo "Greetings non master branches!"
+    agents:
+      queue: "ansible"
+    branches: "!master" 
+
+  - block: Test blocking 
+    branches: "pv/*"
+    fields:
+      - text: "What's your favorite color?"
+        key: "favorite_color"
+        hint: "Don't pick blue... everyone does that"
+      - select: "Who should I notify about your favorite color?"
+        key: "user_to_alert"
+        options:
+        - label: "Your mother"
+          value: "mom"
+        - label: "The CEO"
+          value: "ceo"
+        - label: "Barack Obama"
+          value: "president"
+    
+  - label: "Alert everyone about your favorite color"
+    command: "./alert.sh"
+    agents:
+      queue: "ansible"
+    branches: "pv/*"
