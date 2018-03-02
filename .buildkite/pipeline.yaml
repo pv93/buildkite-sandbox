@@ -15,10 +15,10 @@ steps:
     branches: "pv/*"
     fields:
       - text: "What's your favorite color?"
-        key: "favorite_color"
+        key: "favorite-color"
         hint: "Don't pick blue... everyone does that"
       - select: "Who should I notify about your favorite color?"
-        key: "user_to_alert"
+        key: "user-to-alert"
         options:
         - label: "Your mother"
           value: "mom"
